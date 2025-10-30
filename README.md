@@ -70,6 +70,8 @@ See all supported platforms:
 bazel query 'kind(platform, //platforms/...)'
 ```
 
+### C/C++ Example (rules_cc)
+
 Build a simple C++ program to play with the toolchain:
 ```
 cd examples/rules_cc
@@ -81,6 +83,27 @@ Or just verify that it runs on your current platform:
 cd examples/rules_cc
 bazel run :main
 ```
+
+### Go with cgo Example (rules_go)
+
+Build a Go binary with cgo dependencies:
+```sh
+cd examples/rules_go
+bazel build :cgo_example
+```
+
+Run the Go binary with cgo:
+```sh
+cd examples/rules_go
+bazel run :cgo_example
+```
+
+This example demonstrates:
+- Using `rules_go` with the LLVM bootstrapped toolchain
+- Building Go binaries that call C functions via cgo
+- Cross-compilation of Go binaries with C dependencies
+
+See [examples/rules_go/README.md](examples/rules_go/README.md) for more details.
 
 ## Supported platforms
 
@@ -156,7 +179,8 @@ I have early validation of the most popular targets and os, and will progressive
   (custom LLVM release, user-provided sysroot, static/dynamic linking option for the c++ standard library, libunwind etc.).
 - [IN PROGRESS] Support linking against libstd++ (`libstdcxx` branch).
 - Support for asan/tsan/ubsan.
-- Support `rules_foreign_cc` and `rules_go` out of the box.
+- ✅ `rules_go` example with cgo support (see `examples/rules_go`)
+- Support `rules_foreign_cc` out of the box.
 - Support easy LLVM targets (arm, loongarch, mips, riscv, sparc, spirv, thumb).
 - Support WASM targets.
 - Support Windows.
