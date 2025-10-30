@@ -2,3 +2,7 @@ bazel-*
 .bazelrc.user
 .idea/
 .ijwb/
+
+# CodeQL artifacts
+_codeql_detected_source_root
+root/
