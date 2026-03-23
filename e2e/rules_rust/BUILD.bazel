@@ -23,3 +23,11 @@ rust_binary_cross_build_test_suite(
         "@crates//:mimalloc",
     ],
 )
+
+rust_binary_cross_build_test_suite(
+    name = "clear_cache",
+    srcs = ["src/clear_cache.rs"],
+    platforms = {
+        "@llvm//platforms:linux_aarch64": "aarch64",
+    },
+)

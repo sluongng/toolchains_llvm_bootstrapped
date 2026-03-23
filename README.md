@@ -82,6 +82,7 @@ Rust builds commonly require a few flags:
 - Rust passes `-lgcc_s` when linking, so you will want to set `--@llvm//config:experimental_stub_libgcc_s=True` flag to provide it.
 - Rust `cc-rs` crate does not properly account for `$AR` and `$ARFLAGS` env vars, so it does not work when `llvm-libtool-darwin` is used as the archiver. You will want to set `--@rules_cc//cc/toolchains/args/archiver_flags:use_libtool_on_macos=False` to avoid failure in build scripts using `cc-rs`.
 - Rust forces `-no-pie` when linking musl targets, while we prefer `-static-pie`, which are incompatible. You can configure your platform with the `@llvm//constraints/pie:off` constraint_value to harmonize the link flags. Alternately, you can use the toolchains and platforms defined by [rules_rs](https://github.com/dzbarsky/rules_rs) to do this automatically. Currently you need the `zbarsky/toolchains` branch since the setup is experimental, but we are rapidly stabilizing it!
+- Linux default libs include `clang_rt.builtins` so Rust targets that drive the final link with `-nodefaultlibs` still resolve compiler-rt helper symbols such as `__clear_cache`.
 
 ## Supported platforms
 

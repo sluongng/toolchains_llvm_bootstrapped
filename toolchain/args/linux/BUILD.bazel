@@ -82,6 +82,7 @@ cc_args(
         "@rules_cc//cc/toolchains/actions:link_actions",
     ],
     args = [
+        "{libclang_rt.builtins.a}",
         # We need to support copts like -lc -ldl etc...
         "-L{libc_library_search_path}",
 
@@ -96,9 +97,11 @@ cc_args(
         "-Wl,--pop-state",
     ],
     data = [
+        "//runtimes/compiler-rt:clang_rt.builtins.static",
         "//runtimes/glibc:glibc_library_search_directory",
     ],
     format = {
+        "libclang_rt.builtins.a": "//runtimes/compiler-rt:clang_rt.builtins.static",
         "libc_library_search_path": "//runtimes/glibc:glibc_library_search_directory",
     },
 )
@@ -129,6 +132,7 @@ cc_args(
         "@rules_cc//cc/toolchains/actions:link_actions",
     ],
     args = [
+        "{libclang_rt.builtins.a}",
         # We need to support copts like -lc -ldl etc...
         "-L{libc_library_search_path}",
 
@@ -143,9 +147,11 @@ cc_args(
         "-Wl,--pop-state",
     ],
     data = [
+        "//runtimes/compiler-rt:clang_rt.builtins.static",
         "//runtimes/musl:musl_library_search_directory",
     ],
     format = {
+        "libclang_rt.builtins.a": "//runtimes/compiler-rt:clang_rt.builtins.static",
         "libc_library_search_path": "//runtimes/musl:musl_library_search_directory",
     },
 )
